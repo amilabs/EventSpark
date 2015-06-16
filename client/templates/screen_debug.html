@@ -1,0 +1,139 @@
+<template name="screen_debug">
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Incomming Events</strong></h2>
+    </div>
+    <div id="historyDataTable_wrapper" class="dataTables_wrapper form-inline no-footer">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="input-group">
+                <input id="fltRequestId" class="input-group-sm form-control" placeholder="Request ID">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <select class="input-group-sm form-control" id="fltType">
+                <option value="">ALL</option>
+                <option value="SUCCESS">SUCCESS</option>
+                <option value="WARNING">WARNINGS</option>
+                <option value="ERROR">ERRORS</option>
+            </select>
+        </div>
+        <div class="col-xs-2">
+            <select class="input-group-sm form-control" id="fltPeriod">
+                <option value="0.025">1 minutes</option>
+                <option value="0.5">30 minutes</option>
+                <option value="1">1 hour</option>
+                <option value="6">6 hours</option>
+                <option value="12">12 hours</option>
+                <option value="24" selected>24 hours</option>
+                <option value="48">48 hours</option>
+            </select>
+        </div>
+        <div class="col-xs-1">
+            <button id="filter" class="btn-sm btn-info form-control">FILTER</button>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2">
+            {{#if isRunning}}
+                <button class="btn-sm btn-success form-control" id="stop">PAUSE</button>
+            {{else}}
+                <button class="btn-sm btn-danger form-control" id="stop">RESUME</button>
+            {{/if}}
+        </div>
+    </div>
+    <table width="100%" class="table table-bordered dataTable no-footer table-hover table-striped">
+    <thead>
+        <tr role="row">
+            <th style="width:150px; min-width:150px;">Date</th>
+            <th style="width:200px;">Request ID</th>
+            <th style="width:50px;">Request Count</th>
+            <th style="width:100px;">Type</th>
+            <th>Source</th>
+            <th>Destination</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#if total}}
+        {{#each debug}}
+        <tr role="row" class="debugRow {{class type}}">
+            <td><b><u>{{tsToTime date}}</u></b></td>
+            <td align="center">{{requestId}}</td>
+            <td align="center">{{requestCnt}}</td>
+            <td align="center">{{type}}</td>
+            <td title="{{sourceURL}}">{{source}}</td>
+            <td title="{{destinationURL}}">{{destination}}</td>
+        </tr>
+        {{#if message}}
+        <tr role="row" class="debugRow {{class type}}">
+            <td colspan="6"><b>{{message}}</b></td>
+        </tr>
+        {{/if}}
+        {{#if isObject data}}
+        <tr role="row" class="debugRow {{class type}}">
+            <td colspan="6">
+                <table width="100%">
+                    <tr>
+                        <td width="40%">REQUEST:</td>
+                        <td width="9%" style="text-align:right;"><a class="selectRequest">select all</a></td>
+                        <td>&nbsp;</td>
+                        <td width="40%">RESPONSE:</td>
+                        <td width="9%" style="text-align:right;"><a class="selectResponse">select all</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{{format data.request}}}</td>
+                        <td>&nbsp;</td>
+                        <td colspan="2">{{{format data.response}}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>        
+        {{else}}
+        <tr role="row" class="debugRow {{class type}}">
+            <td colspan="6">{{{format data}}}</td>
+        </tr>
+        {{/if}}
+        <tr class="stripeRow"><td colspan="6">&nbsp;</td></tr>
+        {{/each}}
+    {{else}}
+        <tr class="odd">
+            <td valign="top" colspan="8" class="dataTables_empty">No matching records found</td>
+        </tr>
+    {{/if}}
+    </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-1">
+            <select class="input-group-sm form-control" id="elements_per_page">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">99</option>
+            </select>
+        </div>
+        <div class="col-sm-3 hidden-xs">
+            <div class="dataTables_info" id="historyDataTable_info" role="status" aria-live="polite">
+                <strong>{{page_first_el}}</strong>-<strong>{{page_last_el}}</strong> of <strong>{{total}}</strong>
+            </div>
+        </div>
+        <div class="col-sm-8 col-xs-11 clearfix">
+            <div class="dataTables_paginate paging_bootstrap" id="historyDataTable_paginate">
+                <ul class="pagination pagination-sm remove-margin">
+                    <!--li class="prev disabled">
+                        <a href="javascript:void(0)"><i class="fa fa-chevron-left"></i> </a>
+                    </li-->
+                    {{#each pages}}
+                    <li class="page-element {{#if active}}active{{/if}}">
+                        <a data-page-id="{{page_n}}">{{page_n}}</a>
+                    </li>
+                    {{/each}}
+                    <!--li class="next">
+                        <a data-page-id="{{page_n}}"> <i class="fa fa-chevron-right"></i></a>
+                    </li-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</template>

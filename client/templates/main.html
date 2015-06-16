@@ -1,0 +1,27 @@
+<template name="main">
+<div id="loader"></div>
+<div id="loader-content"></div>
+<div id="page-wrapper">
+    <div class="preloader themed-background">
+        <h1 class="push-top-bottom text-light text-center">EventSpark</h1>
+        <div class="inner">
+            <h3 class="text-light visible-lt-ie9 visible-lt-ie10"><strong>Loading..</strong></h3>
+            <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
+        </div>
+    </div>
+    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+        {{> leftmenu}}
+        <div id="main-container">
+            {{> topmenu}}
+            <!--
+            <div id="testnet" class="text-center">TESTNET IN USE</div>
+            -->
+            <div id="page-content">
+                {{#if Screen.debug}}{{> screen_debug}}{{/if}}
+            </div>
+            {{> footer}}
+        </div>
+    </div>
+</div>
+<div id="dialogWindow"></div>
+</template>
