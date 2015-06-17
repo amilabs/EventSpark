@@ -57,6 +57,8 @@ Meteor.startup(function(){
                             requestId: log.uniqid,
                             requestCnt: 0,
                             source: service,
+                            user: log.user,
+                            ip: log.ip,
                             sourceURL: aServices[service].host,
                             destination: log.data.serviceName,
                             destinationURL: log.data.serviceURL,

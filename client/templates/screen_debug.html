@@ -79,8 +79,9 @@
         <tr role="row">
             <th style="width:150px; min-width:150px;">Date</th>
             <th style="width:200px;">Request ID</th>
-            <th style="width:50px;">Request Count</th>
-            <th style="width:100px;">Type</th>
+            <th style="width:50px;text-align:center;">Request Count</th>
+            <th style="width:100px;text-align:center;">Type</th>
+            <th>User</th>
             <th>Source</th>
             <th>Destination</th>
         </tr>
@@ -90,20 +91,27 @@
         {{#each debug}}
         <tr role="row" class="debugRow {{class type}}">
             <td><b><u>{{tsToTime date}}</u></b></td>
-            <td align="center">{{requestId}}</td>
+            <td>{{requestId}}</td>
             <td align="center">{{requestCnt}}</td>
             <td align="center">{{type}}</td>
+            <td>
+                {{#if user}}
+                {{user}} ({{ip}})
+                {{else}}
+                unknown
+                {{/if}}
+            </td>
             <td title="{{sourceURL}}">{{source}}</td>
             <td title="{{destinationURL}}">{{destination}}</td>
         </tr>
         {{#if message}}
         <tr role="row" class="debugRow {{class type}}">
-            <td colspan="6"><b>{{message}}</b></td>
+            <td colspan="7"><b>{{message}}</b></td>
         </tr>
         {{/if}}
         {{#if isObject data}}
         <tr role="row" class="debugRow {{class type}}">
-            <td colspan="6">
+            <td colspan="7">
                 <table width="100%">
                     <tr>
                         <td width="40%">REQUEST:</td>
@@ -122,14 +130,14 @@
         </tr>        
         {{else}}
         <tr role="row" class="debugRow {{class type}}">
-            <td colspan="6">{{{format data}}}</td>
+            <td colspan="7">{{{format data}}}</td>
         </tr>
         {{/if}}
-        <tr class="stripeRow"><td colspan="6">&nbsp;</td></tr>
+        <tr class="stripeRow"><td colspan="7">&nbsp;</td></tr>
         {{/each}}
     {{else}}
         <tr class="odd">
-            <td valign="top" colspan="8" class="dataTables_empty">No matching records found</td>
+            <td valign="top" colspan="7" class="dataTables_empty">No matching records found</td>
         </tr>
     {{/if}}
     </tbody>
