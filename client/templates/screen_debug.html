@@ -42,6 +42,38 @@
             {{/if}}
         </div>
     </div>
+    <div class="row" style="border-top:1px solid #eee;">
+        <!--div class="col-sm-1">
+            <select class="input-group-sm form-control" id="elements_per_page">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">99</option>
+            </select>
+        </div-->
+        <div class="col-sm-4 hidden-xs">
+            <div class="dataTables_info" id="historyDataTable_info" role="status" aria-live="polite">
+                <strong>{{page_first_el}}</strong>-<strong>{{page_last_el}}</strong> of <strong>{{total}}</strong>
+            </div>
+        </div>
+        <div class="col-sm-8 col-xs-11 clearfix">
+            <div class="dataTables_paginate paging_bootstrap" id="historyDataTable_paginate">
+                <ul class="pagination pagination-sm remove-margin">
+                    <!--li class="prev disabled">
+                        <a href="javascript:void(0)"><i class="fa fa-chevron-left"></i> </a>
+                    </li-->
+                    {{#each pages}}
+                    <li class="page-element {{#if active}}active{{/if}}">
+                        <a data-page-id="{{page_n}}">{{page_n}}</a>
+                    </li>
+                    {{/each}}
+                    <!--li class="next">
+                        <a data-page-id="{{page_n}}"> <i class="fa fa-chevron-right"></i></a>
+                    </li-->
+                </ul>
+            </div>
+        </div>
+    </div>
     <table width="100%" class="table table-bordered dataTable no-footer table-hover table-striped">
     <thead>
         <tr role="row">
@@ -75,10 +107,10 @@
                 <table width="100%">
                     <tr>
                         <td width="40%">REQUEST:</td>
-                        <td width="9%" style="text-align:right;"><a class="selectRequest">select all</a></td>
+                        <td width="9%" style="text-align:right;"><a class="selectRequest">select</a></td>
                         <td>&nbsp;</td>
                         <td width="40%">RESPONSE:</td>
-                        <td width="9%" style="text-align:right;"><a class="selectResponse">select all</a></td>
+                        <td width="9%" style="text-align:right;"><a class="selectResponse">select</a></td>
                     </tr>
                     <tr>
                         <td colspan="2">{{{format data.request}}}</td>
