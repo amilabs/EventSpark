@@ -120,6 +120,7 @@ Template.screen_debug.events({
         Session.set('fltRequestId', $('#fltRequestId').val());
         Session.set('fltType', $('#fltType').val());
         Session.set('fltPeriod', parseFloat($('#fltPeriod').val()));
+        Session.set('page', 1);
         updateDebug();
     },
     'click .page-element': function(evt){
