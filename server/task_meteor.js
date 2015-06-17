@@ -62,7 +62,7 @@ Meteor.startup(function(){
                             sourceURL: aServices[service].host,
                             destination: log.data.serviceName,
                             destinationURL: log.data.serviceURL,
-                            type: log.type ? 'ERROR' : 'SUCCESS', // todo: warnings
+                            type: getLogType(log.type),
                             message: log.message,
                             data: log.data
                         });
@@ -73,3 +73,7 @@ Meteor.startup(function(){
         aIntervals.meteor
     );
 });
+
+function getLogType(type){
+    return ['SUCCESS', 'ERROR', 'WARNING'][type];
+}
