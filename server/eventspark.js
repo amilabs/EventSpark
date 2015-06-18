@@ -1,5 +1,6 @@
 // EventSpark DB
 EventsDB = new Mongo.Collection("eventspark");
+EventsDB.remove({});
 
 // Used to deny all client-side DB modifications
 DenyAll = {
