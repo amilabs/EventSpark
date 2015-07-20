@@ -9,8 +9,6 @@ Meteor.startup(function(){
             DDP.loginWithPassword(
                 oService.conn,
                 {username: oService.user},
-                '', // code
-                '', // password
                 oService.pass,
                 function(error){
                     if(error){
